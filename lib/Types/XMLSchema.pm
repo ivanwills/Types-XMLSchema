@@ -1,48 +1,56 @@
-package MooseX::Types::XMLSchema;
+package Types::XMLSchema;
 #ABSTRACT: XMLSchema compatible Moose types library
 
 use warnings;
 use strict;
 
-use MooseX::Types -declare => [qw(
-    xs:string
-    xs:integer
-    xs:positiveInteger
-    xs:nonPositiveInteger
-    xs:negativeInteger
-    xs:nonNegativeInteger
-    xs:long
-    xs:unsignedLong
-    xs:int
-    xs:unsignedInt
-    xs:short
-    xs:unsignedShort
-    xs:byte
-    xs:unsignedByte
-    xs:boolean
-    xs:float
-    xs:double
-    xs:decimal
-    xs:duration
-    xs:dateTime
-    xs:time
-    xs:date
-    xs:gYearMonth
-    xs:gYear
-    xs:gMonthDay
-    xs:gDay
-    xs:gMonth
-    xs:base64Binary
-    xs:anyURI
-)];
-use Moose::Util::TypeConstraints;
-use MooseX::Types::Moose qw(
-    Str
+use Type::Library
+    -base,
+    -declare => [qw(
+        XsString
+        XsInteger
+        XsPositiveInteger
+        XsNonPositiveInteger
+        XsNegativeInteger
+        XsNonNegativeInteger
+        XsLong
+        XsUnsignedLong
+        XsInt
+        XsUnsignedInt
+        XsShort
+        XsUnsignedShort
+        XsByte
+        XsUnsignedByte
+        XsBoolean
+        XsFloat
+        XsDouble
+        XsDecimal
+        XsDuration
+        XsDateTime
+        XsTime
+        XsDate
+        XsGYearMonth
+        XsGYear
+        XsGMonthDay
+        XsGDay
+        XsGMonth
+        XsBase64Binary
+        XsAnyURI
+
+        MathBigFloat
+        DateTimeDuration
+        DateTime
+        IOHandle
+        URI
+    )];
+use Type::Utils -all;
+use Types::Standard qw/
     Int
-    Num
+    Str
     Bool
+    Num
     ArrayRef
-);
+/;
 
 use Regexp::Common qw( number );
 use MIME::Base64 qw( encode_base64 );
@@ -59,44 +67,44 @@ use Math::BigFloat;
 
     package My::Class;
     use Moose;
-    use MooseX::Types::XMLSchema qw( :all );
+    use Types::XMLSchema qw( :all );
 
-    has 'string'       => ( is => 'rw', isa => 'xs:string' );
+    has 'string'       => ( is => 'rw', isa => 'XsString' );
 
-    has 'boolean'      => ( is => 'rw', isa => 'xs:boolean' );
+    has 'boolean'      => ( is => 'rw', isa => 'XsBoolean' );
 
-    has 'byte'         => ( is => 'rw', isa => 'xs:byte' );
-    has 'short'        => ( is => 'rw', isa => 'xs:short' );
-    has 'int'          => ( is => 'rw', isa => 'xs:int' );
-    has 'long'         => ( is => 'rw', isa => 'xs:long', coerce => 1 );
-    has 'integer'      => ( is => 'rw', isa => 'xs:integer', coerce => 1 );
-    has 'float'        => ( is => 'rw', isa => 'xs:float', coerce => 1 );
-    has 'double'       => ( is => 'rw', isa => 'xs:double', coerce => 1 );
-    has 'decimal'      => ( is => 'rw', isa => 'xs:decimal', coerce => 1 );
+    has 'byte'         => ( is => 'rw', isa => 'XsByte' );
+    has 'short'        => ( is => 'rw', isa => 'XsShort' );
+    has 'int'          => ( is => 'rw', isa => 'XsInt' );
+    has 'long'         => ( is => 'rw', isa => 'XsLong', coerce => 1 );
+    has 'integer'      => ( is => 'rw', isa => 'XsInteger', coerce => 1 );
+    has 'float'        => ( is => 'rw', isa => 'XsFloat', coerce => 1 );
+    has 'double'       => ( is => 'rw', isa => 'XsDouble', coerce => 1 );
+    has 'decimal'      => ( is => 'rw', isa => 'XsDecimal', coerce => 1 );
 
-    has 'duration'     => ( is => 'rw', isa => 'xs:duration', coerce => 1 );
-    has 'datetime'     => ( is => 'rw', isa => 'xs:dateTime', coerce => 1 );
-    has 'time'         => ( is => 'rw', isa => 'xs:time', coerce => 1 );
-    has 'date'         => ( is => 'rw', isa => 'xs:date', coerce => 1 );
-    has 'gYearMonth'   => ( is => 'rw', isa => 'xs:gYearMonth', coerce => 1 );
-    has 'gYear'        => ( is => 'rw', isa => 'xs:gYear', coerce => 1 );
-    has 'gMonthDay'    => ( is => 'rw', isa => 'xs:gMonthDay', coerce => 1 );
-    has 'gDay'         => ( is => 'rw', isa => 'xs:gDay', coerce => 1 );
-    has 'gMonth'       => ( is => 'rw', isa => 'xs:gMonth', coerce => 1 );
+    has 'duration'     => ( is => 'rw', isa => 'XsDuration', coerce => 1 );
+    has 'datetime'     => ( is => 'rw', isa => 'XsDateTime', coerce => 1 );
+    has 'time'         => ( is => 'rw', isa => 'XsTime', coerce => 1 );
+    has 'date'         => ( is => 'rw', isa => 'XsDate', coerce => 1 );
+    has 'gYearMonth'   => ( is => 'rw', isa => 'XsGYearMonth', coerce => 1 );
+    has 'gYear'        => ( is => 'rw', isa => 'XsGYear', coerce => 1 );
+    has 'gMonthDay'    => ( is => 'rw', isa => 'XsGMonthDay', coerce => 1 );
+    has 'gDay'         => ( is => 'rw', isa => 'XsGDay', coerce => 1 );
+    has 'gMonth'       => ( is => 'rw', isa => 'XsGMonth', coerce => 1 );
 
-    has 'base64Binary' => ( is => 'rw', isa => 'xs:base64Binary', coerce => 1 );
+    has 'base64Binary' => ( is => 'rw', isa => 'XsBase64Binary', coerce => 1 );
 
-    has 'anyURI'            => ( is => 'rw', isa => 'xs:anyURI', coerce => 1 );
+    has 'anyURI'            => ( is => 'rw', isa => 'XsAnyURI', coerce => 1 );
 
-    has 'nonPositiveInteger' => ( is => 'rw', isa => 'xs:nonPositiveInteger', coerce => 1 );
-    has 'positiveInteger'    => ( is => 'rw', isa => 'xs:positiveInteger', coerce => 1 );
-    has 'nonNegativeInteger' => ( is => 'rw', isa => 'xs:nonNegativeInteger', coerce => 1 );
-    has 'negativeInteger'    => ( is => 'rw', isa => 'xs:negativeInteger', coerce => 1 );
+    has 'nonPositiveInteger' => ( is => 'rw', isa => 'XsNonPositiveInteger', coerce => 1 );
+    has 'positiveInteger'    => ( is => 'rw', isa => 'XsPositiveInteger', coerce => 1 );
+    has 'nonNegativeInteger' => ( is => 'rw', isa => 'XsNonNegativeInteger', coerce => 1 );
+    has 'negativeInteger'    => ( is => 'rw', isa => 'XsNegativeInteger', coerce => 1 );
 
-    has 'unsignedByte'    => ( is => 'rw', isa => 'xs:unsignedByte' );
-    has 'unsignedShort'   => ( is => 'rw', isa => 'xs:unsignedShort' );
-    has 'unsignedInt'     => ( is => 'rw', isa => 'xs:unsignedInt' );
-    has 'unsignedLong'    => ( is => 'rw', isa => 'xs:unsignedLong', coerce => 1 );
+    has 'unsignedByte'    => ( is => 'rw', isa => 'XsUnsignedByte' );
+    has 'unsignedShort'   => ( is => 'rw', isa => 'XsUnsignedShort' );
+    has 'unsignedInt'     => ( is => 'rw', isa => 'XsUnsignedInt' );
+    has 'unsignedLong'    => ( is => 'rw', isa => 'XsUnsignedLong', coerce => 1 );
 
 Then, elsewhere:
 
@@ -109,12 +117,12 @@ Then, elsewhere:
 
 =cut
 
-class_type 'Math::BigInt';
-class_type 'Math::BigFloat';
-class_type 'DateTime::Duration';
-class_type 'DateTime';
-class_type 'IO::Handle';
-class_type 'URI';
+my $MathBigInt       = class_type { class => 'Math::BigInt' };
+my $MathBigFloat     = class_type { class => 'Math::BigFloat' };
+my $DateTimeDuration = class_type { class => 'DateTime::Duration' };
+my $DateTime         = class_type { class => 'DateTime' };
+my $IOHandle         = class_type { class => 'IO::Handle' };
+my $URI              = class_type { class => 'URI' };
 
 =head1 DESCRIPTION
 
@@ -123,26 +131,26 @@ classes.
 
 =head1 TYPES
 
-=head2 xs:string
+=head2 XsString
 
     has 'string'       => (
         is => 'rw',
-        isa => 'xs:string'
+        isa => 'XsString'
     );
 
 A wrapper around built-in Str.
 
 =cut
 
-subtype 'xs:string' =>
-    as 'Str';
+subtype XsString =>
+    as Str;
 
 
-=head2 xs:integer
+=head2 XsInteger
 
     has 'integer'      => (
         is => 'rw',
-        isa => 'xs:integer',
+        isa => 'XsInteger',
         coerce => 1
     );
 
@@ -152,19 +160,19 @@ This is defined in XSchema to be an arbitrary size integer.
 
 =cut
 
-subtype 'xs:integer' =>
-    as 'Math::BigInt',
+subtype XsInteger =>
+    as $MathBigInt,
     where { ! $_->is_nan && ! $_->is_inf };
 
-coerce 'xs:integer'
-    => from 'Int', via { Math::BigInt->new($_) }
-    => from 'Str', via { Math::BigInt->new($_) };
+coerce XsInteger
+    => from Int, via { Math::BigInt->new($_) }
+    => from Str, via { Math::BigInt->new($_) };
 
-=head2 xs:positiveInteger
+=head2 XsPositiveInteger
 
     has 'positiveInteger' => (
         is => 'rw',
-        isa => 'xs:positiveInteger',
+        isa => 'XsPositiveInteger',
         coerce => 1,
     );
 
@@ -174,16 +182,16 @@ This is defined in XSchema to be an arbitrary size integer greater than zero.
 
 =cut
 
-subtype 'xs:positiveInteger' => as 'Math::BigInt', where { $_ > 0 };
-coerce 'xs:positiveInteger'
-    => from 'Int', via { Math::BigInt->new($_) }
-    => from 'Str', via { Math::BigInt->new($_) };
+subtype XsPositiveInteger => as $MathBigInt, where { $_ > 0 };
+coerce XsPositiveInteger
+    => from Int, via { Math::BigInt->new($_) }
+    => from Str, via { Math::BigInt->new($_) };
 
-=head2 xs:nonPositiveInteger
+=head2 XsNonPositiveInteger
 
     has 'nonPositiveInteger' => (
         is => 'rw',
-        isa => 'xs:nonPositiveInteger',
+        isa => 'XsNonPositiveInteger',
         coerce => 1,
     );
 
@@ -194,16 +202,16 @@ to zero.
 
 =cut
 
-subtype 'xs:nonPositiveInteger' => as 'Math::BigInt', where { $_ <= 0 };
-coerce 'xs:nonPositiveInteger'
-    => from 'Int', via { Math::BigInt->new($_) }
-    => from 'Str', via { Math::BigInt->new($_) };
+subtype XsNonPositiveInteger => as $MathBigInt, where { $_ <= 0 };
+coerce XsNonPositiveInteger
+    => from Int, via { Math::BigInt->new($_) }
+    => from Str, via { Math::BigInt->new($_) };
 
-=head2 xs:negativeInteger
+=head2 XsNegativeInteger
 
     has 'negativeInteger' => (
         is => 'rw',
-        isa => 'xs:negativeInteger',
+        isa => 'XsNegativeInteger',
         coerce => 1,
     );
 
@@ -213,16 +221,16 @@ This is defined in XSchema to be an arbitrary size integer less than zero.
 
 =cut
 
-subtype 'xs:negativeInteger' => as 'Math::BigInt', where { $_ < 0 };
-coerce 'xs:negativeInteger'
-    => from 'Int', via { Math::BigInt->new($_) }
-    => from 'Str', via { Math::BigInt->new($_) };
+subtype XsNegativeInteger => as $MathBigInt, where { $_ < 0 };
+coerce XsNegativeInteger
+    => from Int, via { Math::BigInt->new($_) }
+    => from Str, via { Math::BigInt->new($_) };
 
-=head2 xs:nonNegativeInteger
+=head2 XsNonNegativeInteger
 
     has 'nonPositiveInteger' => (
         is => 'rw',
-        isa => 'xs:nonNegativeInteger',
+        isa => 'XsNonNegativeInteger',
         coerce => 1,
     );
 
@@ -234,18 +242,18 @@ equal to zero.
 
 =cut
 
-subtype 'xs:nonNegativeInteger' =>
-    as 'Math::BigInt',
+subtype XsNonNegativeInteger =>
+    as $MathBigInt,
         where { $_ >= 0 };
-coerce 'xs:nonNegativeInteger'
-    => from 'Int', via { Math::BigInt->new($_) }
-    => from 'Str', via { Math::BigInt->new($_) };
+coerce XsNonNegativeInteger
+    => from Int, via { Math::BigInt->new($_) }
+    => from Str, via { Math::BigInt->new($_) };
 
-=head2 xs:long
+=head2 XsLong
 
     has 'long' => (
         is => 'rw',
-        isa => 'xs:long',
+        isa => 'XsLong',
         coerce => 1,
     );
 
@@ -258,19 +266,19 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
     my $min = Math::BigInt->new('-9223372036854775808');
     my $max = Math::BigInt->new('9223372036854775807');
 
-    subtype 'xs:long' =>
-        as 'Math::BigInt',
+    subtype XsLong =>
+        as $MathBigInt,
             where { $_ <= $max && $_ >= $min };
-    coerce 'xs:long'
-        => from 'Int', via { Math::BigInt->new($_) }
-        => from 'Str', via { Math::BigInt->new($_) };
+    coerce XsLong
+        => from Int, via { Math::BigInt->new($_) }
+        => from Str, via { Math::BigInt->new($_) };
 }
 
-=head2 xs:unsignedLong
+=head2 XsUnsignedLong
 
     has 'unsignedLong' => (
         is => 'rw',
-        isa => 'xs:unsignedLong',
+        isa => 'XsUnsignedLong',
         coerce => 1,
     );
 
@@ -282,124 +290,124 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
 {
     my $max = Math::BigInt->new('18446744073709551615');
 
-    subtype 'xs:unsignedLong' =>
-        as 'Math::BigInt',
+    subtype XsUnsignedLong =>
+        as $MathBigInt,
             where { $_ >= 0 && $_ <= $max };
-    coerce 'xs:unsignedLong'
-        => from 'Int', via { Math::BigInt->new($_) }
-        => from 'Str', via { Math::BigInt->new($_) };
+    coerce XsUnsignedLong
+        => from Int, via { Math::BigInt->new($_) }
+        => from Str, via { Math::BigInt->new($_) };
 }
 
-=head2 xs:int
+=head2 XsInt
 
     has 'int' => (
         is => 'rw',
-        isa => 'xs:int'
+        isa => 'XsInt'
     );
 
 A 32-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:int' =>
-    as 'Int',
+subtype XsInt,
+    as Int,
         where { $_ <= 2147483647 && $_ >= -2147483648 };
 
-=head2 xs:unsignedInt
+=head2 XsUnsignedInt
 
     has 'unsignedInt' => (
         is => 'rw',
-        isa => 'xs:unsignedInt'
+        isa => 'XsUnsignedInt'
     );
 
 A 32-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:unsignedInt' =>
-    as 'Int',
+subtype XsUnsignedInt,
+    as Int,
         where { $_ <= 4294967295 && $_ >= 0};
 
-=head2 xs:short
+=head2 XsShort
 
     has 'short' => (
         is => 'rw',
-        isa => 'xs:short'
+        isa => 'XsShort'
     );
 
 A 16-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:short' =>
-    as 'Int',
+subtype XsShort =>
+    as Int,
         where { $_ <= 32767 && $_ >= -32768 };
 
-=head2 xs:unsignedShort
+=head2 XsUnsignedShort
 
     has 'unsignedShort' => (
         is => 'rw',
-        isa => 'xs:unsignedShort'
+        isa => 'XsUnsignedShort'
     );
 
 A 16-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:unsignedShort' =>
-    as 'Int',
+subtype XsUnsignedShort =>
+    as Int,
         where { $_ <= 65535 && $_ >= 0 };
 
-=head2 xs:byte
+=head2 XsByte
 
     has 'byte' => (
         is => 'rw',
-        isa => 'xs:byte'
+        isa => 'XsByte'
     );
 
 An 8-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:byte' =>
-    as 'Int',
+subtype XsByte =>
+    as Int,
         where { $_ <= 127 && $_ >= -128 };
 
-=head2 xs:unsignedByte
+=head2 XsUnsignedByte
 
     has 'unsignedByte' => (
         is => 'rw',
-        isa => 'xs:unsignedByte'
+        isa => 'XsUnsignedByte'
     );
 
 An 8-bit integer. Represented natively.
 
 =cut
 
-subtype 'xs:unsignedByte' =>
-    as 'Int',
+subtype XsUnsignedByte =>
+    as Int,
         where { $_ <= 255 && $_ >= 0 };
 
-=head2 xs:boolean
+=head2 XsBoolean
 
     has 'boolean' => (
         is => 'rw',
-        isa => 'xs:boolean'
+        isa => 'XsBoolean'
     );
 
 A wrapper around built-in Bool.
 
 =cut
 
-subtype 'xs:boolean' =>
-    as 'Bool';
+subtype XsBoolean =>
+    as Bool;
 
 
-=head2 xs:float
+=head2 XsFloat
 
     has 'float' => (
         is => 'rw',
-        isa => 'xs:float',
+        isa => 'XsFloat',
         coerce => 1,
     );
 
@@ -413,19 +421,19 @@ A single-precision 32-bit Float. Represented as a L<Math::BigFloat> object, but 
     my $min = $m * Math::BigFloat->new(2 ** -149);
     my $max = $m * Math::BigFloat->new(2 ** 104);
 
-    subtype 'xs:float' =>
-        as 'Math::BigFloat',
+    subtype XsFloat =>
+        as $MathBigFloat,
             where { $_->is_nan || $_->is_inf || ( $_ <= $max && $_ >= $min ) };
-    coerce 'xs:float'
-        => from 'Num', via { Math::BigFloat->new($_) }
-        => from 'Str', via { Math::BigFloat->new($_) };
+    coerce XsFloat
+        => from Num, via { Math::BigFloat->new($_) }
+        => from Str, via { Math::BigFloat->new($_) };
 }
 
-=head2 xs:double
+=head2 XsDouble
 
     has 'double' => (
         is => 'rw',
-        isa => 'xs:double',
+        isa => 'XsDouble',
         coerce => 1,
     );
 
@@ -439,19 +447,19 @@ A double-precision 64-bit Float. Represented as a L<Math::BigFloat> object, but 
     my $min = $m * Math::BigFloat->new(2 ** -1075);
     my $max = $m * Math::BigFloat->new(2 ** 970);
 
-    subtype 'xs:double' =>
-        as 'Math::BigFloat',
+    subtype XsDouble =>
+        as $MathBigFloat,
             where { $_->is_nan || $_->is_inf || ( $_ < $max && $_ > $min ) };
-    coerce 'xs:double'
-        => from 'Num', via { Math::BigFloat->new($_) }
-        => from 'Str', via { Math::BigFloat->new($_) };
+    coerce XsDouble
+        => from Num, via { Math::BigFloat->new($_) }
+        => from Str, via { Math::BigFloat->new($_) };
 }
 
-=head2 xs:decimal
+=head2 XsDecimal
 
     has 'decimal' => (
         is => 'rw',
-        isa => 'xs:decimal',
+        isa => 'XsDecimal',
         coerce => 1,
     );
 
@@ -459,19 +467,19 @@ Any base-10 fixed-point number. Represented as a L<Math::BigFloat> object. Set t
 
 =cut
 
-subtype 'xs:decimal' =>
-    as 'Math::BigFloat',
+subtype XsDecimal =>
+    as $MathBigFloat,
     where { ! $_->is_nan && ! $_->is_inf };
-coerce 'xs:decimal'
-    => from 'Num', via { Math::BigFloat->new($_) }
-    => from 'Str', via { Math::BigFloat->new($_) };
+coerce XsDecimal
+    => from Num, via { Math::BigFloat->new($_) }
+    => from Str, via { Math::BigFloat->new($_) };
 
 
-=head2 xs:duration
+=head2 XsDuration
 
     has 'duration' => (
         is => 'rw',
-        isa => 'xs:duration',
+        isa => 'XsDuration',
         coerce => 1,
     );
 
@@ -480,12 +488,12 @@ If you enable coerce you can pass a DateTime::Duration object.
 
 =cut
 
-subtype 'xs:duration' =>
-    as 'Str' =>
-        where { /^\-?P\d+Y\d+M\d+DT\d+H\d+M\d+(?:\.\d+)?S$/ };
+subtype XsDuration =>
+    as Str,
+    where { /^\-?P\d+Y\d+M\d+DT\d+H\d+M\d+(?:\.\d+)?S$/ };
 
-coerce 'xs:duration'
-    => from 'DateTime::Duration' =>
+coerce XsDuration
+    => from $DateTimeDuration =>
         via {
             my $is_negative;
             if ($_->is_negative) {
@@ -513,11 +521,11 @@ coerce 'xs:duration'
             );
         };
 
-=head2 xs:dateTime
+=head2 XsDateTime
 
     has 'datetime' => (
         is => 'rw',
-        isa => 'xs:dateTime',
+        isa => 'XsDateTime',
         coerce => 1
     );
 
@@ -527,12 +535,12 @@ If you enable coerce you can pass a DateTime object.
 =cut
 
 
-subtype 'xs:dateTime' =>
-    as 'Str' =>
+subtype XsDateTime =>
+    as Str,
         where { /^\-?\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
-coerce 'xs:dateTime'
-    => from 'DateTime' =>
+coerce XsDateTime
+    => from $DateTime =>
         via {
             my $datetime = $_->strftime( $_->nanosecond ? "%FT%T.%N" : "%FT%T");
             $datetime =~ s/0+$// if $_->nanosecond;
@@ -549,11 +557,11 @@ coerce 'xs:dateTime'
         };
 
 
-=head2 xs:time
+=head2 XsTime
 
     has 'time' => (
         is => 'rw',
-        isa => 'xs:time',
+        isa => 'XsTime',
         coerce => 1
     );
 
@@ -562,12 +570,12 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype 'xs:time' =>
-    as 'Str' =>
+subtype XsTime =>
+    as Str,
         where { /^\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
-coerce 'xs:time'
-    => from 'DateTime' =>
+coerce XsTime
+    => from $DateTime =>
         via {
             my $time = $_->strftime( $_->nanosecond ? "%T.%N" : "%T");
             $time =~ s/0+$// if $_->nanosecond;
@@ -584,11 +592,11 @@ coerce 'xs:time'
         };
 
 
-=head2 xs:date
+=head2 XsDate
 
     has 'date'  => (
         is => 'rw',
-        isa => 'xs:date',
+        isa => 'XsDate',
         coerce => 1
     );
 
@@ -597,12 +605,12 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype 'xs:date' =>
-    as 'Str' =>
+subtype XsDate =>
+    as Str,
         where { /^\-?\d{4}\-\d{2}\-\d{2}Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
-coerce 'xs:date'
-    => from 'DateTime' =>
+coerce XsDate
+    => from $DateTime =>
         via {
             my $date = $_->strftime("%F");
             my $tz = $_->time_zone;
@@ -619,11 +627,11 @@ coerce 'xs:date'
         };
 
 
-=head2 xs:gYearMonth
+=head2 XsGYearMonth
 
     has 'gYearMonth' => (
         is => 'rw',
-        isa => 'xs:gYearMonth',
+        isa => 'XsGYearMonth',
         coerce => 1
     );
 
@@ -633,31 +641,31 @@ integers.
 
 =cut
 
-subtype '__xs:IntPair' =>
-    as 'ArrayRef[Int]' =>
+subtype __XsintPair =>
+    as ArrayRef[Int] =>
         where { @$_ == 2 };
 
 
-subtype 'xs:gYearMonth' =>
-    as 'Str' =>
+subtype XsGYearMonth =>
+    as Str,
         where { /^\d{4}\-\d{2}$/ };
 
-coerce 'xs:gYearMonth'
-    => from '__xs:IntPair' =>
+coerce XsGYearMonth
+    => from '__XsintPair' =>
         via {
             return sprintf("%02d-%02d", @$_);
         }
-    => from 'DateTime' =>
+    => from $DateTime =>
         via {
             return $_->strftime("%Y-%m");
         };
 
 
-=head2 xs:gYear
+=head2 XsGYear
 
     has 'gYear' => (
         is => 'rw',
-        isa => 'xs:gYear',
+        isa => 'XsGYear',
         coerce => 1
     );
 
@@ -666,22 +674,22 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype 'xs:gYear' =>
-    as 'Str' =>
+subtype XsGYear =>
+    as Str,
         where { /^\d{4}$/ };
 
-coerce 'xs:gYear'
-    => from 'DateTime' =>
+coerce XsGYear
+    => from $DateTime =>
         via {
             return $_->strftime("%Y");
         };
 
 
-=head2 xs:gMonthDay
+=head2 XsGMonthDay
 
     has 'gMonthDay' => (
         is => 'rw',
-        isa => 'xs:gMonthDay',
+        isa => 'XsGMonthDay',
         coerce => 1
     );
 
@@ -691,26 +699,26 @@ integers.
 
 =cut
 
-subtype 'xs:gMonthDay' =>
-    as 'Str' =>
+subtype XsGMonthDay =>
+    as Str,
         where { /^\-\-\d{2}\-\d{2}$/ };
 
-coerce 'xs:gMonthDay'
-    => from '__xs:IntPair' =>
+coerce XsGMonthDay
+    => from '__XsintPair' =>
         via {
             return sprintf("--%02d-%02d", @$_);
         }
-    => from 'DateTime' =>
+    => from $DateTime =>
         via {
             return $_->strftime("--%m-%d");
         };
 
 
-=head2 xs:gDay
+=head2 XsGDay
 
     has 'gDay' => (
         is => 'rw',
-        isa => 'xs:gDay',
+        isa => 'XsGDay',
         coerce => 1
     );
 
@@ -719,26 +727,26 @@ If you enable coerce you can pass a DateTime object or Int eg. 24.
 
 =cut
 
-subtype 'xs:gDay' =>
-    as 'Str' =>
+subtype XsGDay =>
+    as Str,
         where { /^\-\-\-\d{2}$/ };
 
-coerce 'xs:gDay'
-    => from 'Int' =>
+coerce XsGDay
+    => from Int,
         via {
             return sprintf("---%02d", $_);
         }
-    => from 'DateTime' =>
+    => from $DateTime =>
         via {
             return $_->strftime("---%d");
         };
 
 
-=head2 xs:gMonth
+=head2 XsGMonth
 
     has 'gMonth' => (
         is => 'rw',
-        isa => 'xs:gMonth',
+        isa => 'XsGMonth',
         coerce => 1
     );
 
@@ -747,26 +755,26 @@ If you enable coerce you can pass a DateTime object or Int eg. 10.
 
 =cut
 
-subtype 'xs:gMonth' =>
-    as 'Str' =>
+subtype XsGMonth =>
+    as Str,
         where { $_ => /^\-\-\d{2}$/ };
 
-coerce 'xs:gMonth'
-    => from 'Int' =>
+coerce XsGMonth
+    => from Int,
         via {
             return sprintf("--%02d", $_);
         }
-    => from 'DateTime' =>
+    => from $DateTime =>
         via {
             return $_->strftime("--%m");
         };
 
 
-=head2 xs:base64Binary
+=head2 XsBase64Binary
 
     has 'base64Binary' => (
         is => 'rw',
-        isa => 'xs:base64Binary',
+        isa => 'XsBase64Binary',
         coerce => 1
     );
 
@@ -776,12 +784,12 @@ file will be encoded to UTF-8 before encoding with base64.
 
 =cut
 
-subtype 'xs:base64Binary' =>
-    as 'Str' =>
+subtype XsBase64Binary =>
+    as Str,
         where { $_ =~ /^[a-zA-Z0-9=\+\/]+$/m };
 
-coerce 'xs:base64Binary'
-    => from 'IO::Handle' =>
+coerce XsBase64Binary
+    => from $IOHandle =>
         via {
             local $/;
             my $content = <$_>;
@@ -789,11 +797,11 @@ coerce 'xs:base64Binary'
         };
 
 
-=head2 xs:anyURI
+=head2 XsAnyURI
 
     has 'anyURI' => (
         is => 'rw',
-        isa => 'xs:anyURI',
+        isa => 'XsAnyURI',
         coerce => 1
     );
 
@@ -802,12 +810,12 @@ If you enable coerce you can pass a URI object.
 
 =cut
 
-subtype 'xs:anyURI' =>
-    as 'Str' =>
+subtype XsAnyURI =>
+    as Str,
         where { $_ =~ /^\w+:\/\/.*$/ };
 
-coerce 'xs:anyURI'
-    => from 'URI' =>
+coerce XsAnyURI
+    => from $URI,
         via {
             return $_->as_string;
         };
@@ -828,4 +836,4 @@ L<MooseX::AlwaysCoerce>
 
 =cut
 
-1; # End of MooseX::Types::XMLSchema
+1; # End of Types::XMLSchema

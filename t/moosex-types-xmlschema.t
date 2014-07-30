@@ -16,7 +16,7 @@ use URI;
     package TestTypesXMLSchema;
     use Moose;
 
-    use MooseX::Types::XMLSchema qw( :all );
+    use Types::XMLSchema qw( :all );
 
     has 'string'       => ( is => 'rw', isa => 'xs:string' );
     has 'int'          => ( is => 'rw', isa => 'xs:int' );

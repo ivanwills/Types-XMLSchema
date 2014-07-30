@@ -1,13 +1,13 @@
 NAME
-    MooseX::Types::XMLSchema - XMLSchema compatible Moose types library
+    Types::XMLSchema - XMLSchema compatible Moose types library
 
 VERSION
-    version 0.06
+    version 0.07
 
 SYNOPSIS
         package My::Class;
         use Moose;
-        use MooseX::Types::XMLSchema qw( :all );
+        use Types::XMLSchema qw( :all );
 
         has 'string'       => ( is => 'rw', isa => 'xs:string' );
 
