@@ -69,42 +69,42 @@ use Math::BigFloat;
     use Moose;
     use Types::XMLSchema qw( :all );
 
-    has 'string'       => ( is => 'rw', isa => 'XsString' );
+    has 'string'       => ( is => 'rw', isa => XsString );
 
-    has 'boolean'      => ( is => 'rw', isa => 'XsBoolean' );
+    has 'boolean'      => ( is => 'rw', isa => XsBoolean );
 
-    has 'byte'         => ( is => 'rw', isa => 'XsByte' );
-    has 'short'        => ( is => 'rw', isa => 'XsShort' );
-    has 'int'          => ( is => 'rw', isa => 'XsInt' );
-    has 'long'         => ( is => 'rw', isa => 'XsLong', coerce => 1 );
-    has 'integer'      => ( is => 'rw', isa => 'XsInteger', coerce => 1 );
-    has 'float'        => ( is => 'rw', isa => 'XsFloat', coerce => 1 );
-    has 'double'       => ( is => 'rw', isa => 'XsDouble', coerce => 1 );
-    has 'decimal'      => ( is => 'rw', isa => 'XsDecimal', coerce => 1 );
+    has 'byte'         => ( is => 'rw', isa => XsByte );
+    has 'short'        => ( is => 'rw', isa => XsShort );
+    has 'int'          => ( is => 'rw', isa => XsInt );
+    has 'long'         => ( is => 'rw', isa => XsLong, coerce => 1 );
+    has 'integer'      => ( is => 'rw', isa => XsInteger, coerce => 1 );
+    has 'float'        => ( is => 'rw', isa => XsFloat, coerce => 1 );
+    has 'double'       => ( is => 'rw', isa => XsDouble, coerce => 1 );
+    has 'decimal'      => ( is => 'rw', isa => XsDecimal, coerce => 1 );
 
-    has 'duration'     => ( is => 'rw', isa => 'XsDuration', coerce => 1 );
-    has 'datetime'     => ( is => 'rw', isa => 'XsDateTime', coerce => 1 );
-    has 'time'         => ( is => 'rw', isa => 'XsTime', coerce => 1 );
-    has 'date'         => ( is => 'rw', isa => 'XsDate', coerce => 1 );
-    has 'gYearMonth'   => ( is => 'rw', isa => 'XsGYearMonth', coerce => 1 );
-    has 'gYear'        => ( is => 'rw', isa => 'XsGYear', coerce => 1 );
-    has 'gMonthDay'    => ( is => 'rw', isa => 'XsGMonthDay', coerce => 1 );
-    has 'gDay'         => ( is => 'rw', isa => 'XsGDay', coerce => 1 );
-    has 'gMonth'       => ( is => 'rw', isa => 'XsGMonth', coerce => 1 );
+    has 'duration'     => ( is => 'rw', isa => XsDuration, coerce => 1 );
+    has 'datetime'     => ( is => 'rw', isa => XsDateTime, coerce => 1 );
+    has 'time'         => ( is => 'rw', isa => XsTime, coerce => 1 );
+    has 'date'         => ( is => 'rw', isa => XsDate, coerce => 1 );
+    has 'gYearMonth'   => ( is => 'rw', isa => XsGYearMonth, coerce => 1 );
+    has 'gYear'        => ( is => 'rw', isa => XsGYear, coerce => 1 );
+    has 'gMonthDay'    => ( is => 'rw', isa => XsGMonthDay, coerce => 1 );
+    has 'gDay'         => ( is => 'rw', isa => XsGDay, coerce => 1 );
+    has 'gMonth'       => ( is => 'rw', isa => XsGMonth, coerce => 1 );
 
-    has 'base64Binary' => ( is => 'rw', isa => 'XsBase64Binary', coerce => 1 );
+    has 'base64Binary' => ( is => 'rw', isa => XsBase64Binary, coerce => 1 );
 
-    has 'anyURI'            => ( is => 'rw', isa => 'XsAnyURI', coerce => 1 );
+    has 'anyURI'            => ( is => 'rw', isa => XsAnyURI, coerce => 1 );
 
-    has 'nonPositiveInteger' => ( is => 'rw', isa => 'XsNonPositiveInteger', coerce => 1 );
-    has 'positiveInteger'    => ( is => 'rw', isa => 'XsPositiveInteger', coerce => 1 );
-    has 'nonNegativeInteger' => ( is => 'rw', isa => 'XsNonNegativeInteger', coerce => 1 );
-    has 'negativeInteger'    => ( is => 'rw', isa => 'XsNegativeInteger', coerce => 1 );
+    has 'nonPositiveInteger' => ( is => 'rw', isa => XsNonPositiveInteger, coerce => 1 );
+    has 'positiveInteger'    => ( is => 'rw', isa => XsPositiveInteger, coerce => 1 );
+    has 'nonNegativeInteger' => ( is => 'rw', isa => XsNonNegativeInteger, coerce => 1 );
+    has 'negativeInteger'    => ( is => 'rw', isa => XsNegativeInteger, coerce => 1 );
 
-    has 'unsignedByte'    => ( is => 'rw', isa => 'XsUnsignedByte' );
-    has 'unsignedShort'   => ( is => 'rw', isa => 'XsUnsignedShort' );
-    has 'unsignedInt'     => ( is => 'rw', isa => 'XsUnsignedInt' );
-    has 'unsignedLong'    => ( is => 'rw', isa => 'XsUnsignedLong', coerce => 1 );
+    has 'unsignedByte'    => ( is => 'rw', isa => XsUnsignedByte );
+    has 'unsignedShort'   => ( is => 'rw', isa => XsUnsignedShort );
+    has 'unsignedInt'     => ( is => 'rw', isa => XsUnsignedInt );
+    has 'unsignedLong'    => ( is => 'rw', isa => XsUnsignedLong, coerce => 1 );
 
 Then, elsewhere:
 
@@ -135,7 +135,7 @@ classes.
 
     has 'string'       => (
         is => 'rw',
-        isa => 'XsString'
+        isa => XsString
     );
 
 A wrapper around built-in Str.
@@ -150,7 +150,7 @@ declare XsString =>
 
     has 'integer'      => (
         is => 'rw',
-        isa => 'XsInteger',
+        isa => XsInteger,
         coerce => 1
     );
 
@@ -172,7 +172,7 @@ coerce XsInteger
 
     has 'positiveInteger' => (
         is => 'rw',
-        isa => 'XsPositiveInteger',
+        isa => XsPositiveInteger,
         coerce => 1,
     );
 
@@ -191,7 +191,7 @@ coerce XsPositiveInteger
 
     has 'nonPositiveInteger' => (
         is => 'rw',
-        isa => 'XsNonPositiveInteger',
+        isa => XsNonPositiveInteger,
         coerce => 1,
     );
 
@@ -211,7 +211,7 @@ coerce XsNonPositiveInteger
 
     has 'negativeInteger' => (
         is => 'rw',
-        isa => 'XsNegativeInteger',
+        isa => XsNegativeInteger,
         coerce => 1,
     );
 
@@ -230,7 +230,7 @@ coerce XsNegativeInteger
 
     has 'nonPositiveInteger' => (
         is => 'rw',
-        isa => 'XsNonNegativeInteger',
+        isa => XsNonNegativeInteger,
         coerce => 1,
     );
 
@@ -253,7 +253,7 @@ coerce XsNonNegativeInteger
 
     has 'long' => (
         is => 'rw',
-        isa => 'XsLong',
+        isa => XsLong,
         coerce => 1,
     );
 
@@ -278,7 +278,7 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
 
     has 'unsignedLong' => (
         is => 'rw',
-        isa => 'XsUnsignedLong',
+        isa => XsUnsignedLong,
         coerce => 1,
     );
 
@@ -302,7 +302,7 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
 
     has 'int' => (
         is => 'rw',
-        isa => 'XsInt'
+        isa => XsInt
     );
 
 A 32-bit integer. Represented natively.
@@ -317,7 +317,7 @@ declare XsInt =>
 
     has 'unsignedInt' => (
         is => 'rw',
-        isa => 'XsUnsignedInt'
+        isa => XsUnsignedInt
     );
 
 A 32-bit integer. Represented natively.
@@ -332,7 +332,7 @@ declare XsUnsignedInt =>
 
     has 'short' => (
         is => 'rw',
-        isa => 'XsShort'
+        isa => XsShort
     );
 
 A 16-bit integer. Represented natively.
@@ -347,7 +347,7 @@ declare XsShort =>
 
     has 'unsignedShort' => (
         is => 'rw',
-        isa => 'XsUnsignedShort'
+        isa => XsUnsignedShort
     );
 
 A 16-bit integer. Represented natively.
@@ -362,7 +362,7 @@ declare XsUnsignedShort =>
 
     has 'byte' => (
         is => 'rw',
-        isa => 'XsByte'
+        isa => XsByte
     );
 
 An 8-bit integer. Represented natively.
@@ -377,7 +377,7 @@ declare XsByte =>
 
     has 'unsignedByte' => (
         is => 'rw',
-        isa => 'XsUnsignedByte'
+        isa => XsUnsignedByte
     );
 
 An 8-bit integer. Represented natively.
@@ -392,7 +392,7 @@ declare XsUnsignedByte =>
 
     has 'boolean' => (
         is => 'rw',
-        isa => 'XsBoolean'
+        isa => XsBoolean
     );
 
 A wrapper around built-in Bool.
@@ -407,7 +407,7 @@ declare XsBoolean =>
 
     has 'float' => (
         is => 'rw',
-        isa => 'XsFloat',
+        isa => XsFloat,
         coerce => 1,
     );
 
@@ -433,7 +433,7 @@ A single-precision 32-bit Float. Represented as a L<Math::BigFloat> object, but 
 
     has 'double' => (
         is => 'rw',
-        isa => 'XsDouble',
+        isa => XsDouble,
         coerce => 1,
     );
 
@@ -459,7 +459,7 @@ A double-precision 64-bit Float. Represented as a L<Math::BigFloat> object, but 
 
     has 'decimal' => (
         is => 'rw',
-        isa => 'XsDecimal',
+        isa => XsDecimal,
         coerce => 1,
     );
 
@@ -479,7 +479,7 @@ coerce XsDecimal
 
     has 'duration' => (
         is => 'rw',
-        isa => 'XsDuration',
+        isa => XsDuration,
         coerce => 1,
     );
 
@@ -525,7 +525,7 @@ coerce XsDuration
 
     has 'datetime' => (
         is => 'rw',
-        isa => 'XsDateTime',
+        isa => XsDateTime,
         coerce => 1
     );
 
@@ -561,7 +561,7 @@ coerce XsDateTime
 
     has 'time' => (
         is => 'rw',
-        isa => 'XsTime',
+        isa => XsTime,
         coerce => 1
     );
 
@@ -596,7 +596,7 @@ coerce XsTime
 
     has 'date'  => (
         is => 'rw',
-        isa => 'XsDate',
+        isa => XsDate,
         coerce => 1
     );
 
@@ -631,7 +631,7 @@ coerce XsDate
 
     has 'gYearMonth' => (
         is => 'rw',
-        isa => 'XsGYearMonth',
+        isa => XsGYearMonth,
         coerce => 1
     );
 
@@ -641,7 +641,7 @@ integers.
 
 =cut
 
-declare __XsintPair =>
+declare __XsIntPair =>
     as ArrayRef[Int] =>
         where { @$_ == 2 };
 
@@ -651,7 +651,7 @@ declare XsGYearMonth =>
         where { /^\d{4}\-\d{2}$/ };
 
 coerce XsGYearMonth
-    => from '__XsintPair' =>
+    => from __XsIntPair =>
         via {
             return sprintf("%02d-%02d", @$_);
         }
@@ -665,7 +665,7 @@ coerce XsGYearMonth
 
     has 'gYear' => (
         is => 'rw',
-        isa => 'XsGYear',
+        isa => XsGYear,
         coerce => 1
     );
 
@@ -689,7 +689,7 @@ coerce XsGYear
 
     has 'gMonthDay' => (
         is => 'rw',
-        isa => 'XsGMonthDay',
+        isa => XsGMonthDay,
         coerce => 1
     );
 
@@ -704,7 +704,7 @@ declare XsGMonthDay =>
         where { /^\-\-\d{2}\-\d{2}$/ };
 
 coerce XsGMonthDay
-    => from '__XsintPair' =>
+    => from __XsIntPair =>
         via {
             return sprintf("--%02d-%02d", @$_);
         }
@@ -718,7 +718,7 @@ coerce XsGMonthDay
 
     has 'gDay' => (
         is => 'rw',
-        isa => 'XsGDay',
+        isa => XsGDay,
         coerce => 1
     );
 
@@ -746,7 +746,7 @@ coerce XsGDay
 
     has 'gMonth' => (
         is => 'rw',
-        isa => 'XsGMonth',
+        isa => XsGMonth,
         coerce => 1
     );
 
@@ -774,7 +774,7 @@ coerce XsGMonth
 
     has 'base64Binary' => (
         is => 'rw',
-        isa => 'XsBase64Binary',
+        isa => XsBase64Binary,
         coerce => 1
     );
 
@@ -801,7 +801,7 @@ coerce XsBase64Binary
 
     has 'anyURI' => (
         is => 'rw',
-        isa => 'XsAnyURI',
+        isa => XsAnyURI,
         coerce => 1
     );
 
