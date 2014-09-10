@@ -142,7 +142,7 @@ A wrapper around built-in Str.
 
 =cut
 
-subtype XsString =>
+declare XsString =>
     as Str;
 
 
@@ -160,7 +160,7 @@ This is defined in XSchema to be an arbitrary size integer.
 
 =cut
 
-subtype XsInteger =>
+declare XsInteger =>
     as $MathBigInt,
     where { ! $_->is_nan && ! $_->is_inf };
 
@@ -182,7 +182,7 @@ This is defined in XSchema to be an arbitrary size integer greater than zero.
 
 =cut
 
-subtype XsPositiveInteger => as $MathBigInt, where { $_ > 0 };
+declare XsPositiveInteger => as $MathBigInt, where { $_ > 0 };
 coerce XsPositiveInteger
     => from Int, via { Math::BigInt->new($_) }
     => from Str, via { Math::BigInt->new($_) };
@@ -202,7 +202,7 @@ to zero.
 
 =cut
 
-subtype XsNonPositiveInteger => as $MathBigInt, where { $_ <= 0 };
+declare XsNonPositiveInteger => as $MathBigInt, where { $_ <= 0 };
 coerce XsNonPositiveInteger
     => from Int, via { Math::BigInt->new($_) }
     => from Str, via { Math::BigInt->new($_) };
@@ -221,7 +221,7 @@ This is defined in XSchema to be an arbitrary size integer less than zero.
 
 =cut
 
-subtype XsNegativeInteger => as $MathBigInt, where { $_ < 0 };
+declare XsNegativeInteger => as $MathBigInt, where { $_ < 0 };
 coerce XsNegativeInteger
     => from Int, via { Math::BigInt->new($_) }
     => from Str, via { Math::BigInt->new($_) };
@@ -242,7 +242,7 @@ equal to zero.
 
 =cut
 
-subtype XsNonNegativeInteger =>
+declare XsNonNegativeInteger =>
     as $MathBigInt,
         where { $_ >= 0 };
 coerce XsNonNegativeInteger
@@ -266,7 +266,7 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
     my $min = Math::BigInt->new('-9223372036854775808');
     my $max = Math::BigInt->new('9223372036854775807');
 
-    subtype XsLong =>
+    declare XsLong =>
         as $MathBigInt,
             where { $_ <= $max && $_ >= $min };
     coerce XsLong
@@ -290,7 +290,7 @@ A 64-bit Integer. Represented as a L<Math::Bigint> object, but limited to the
 {
     my $max = Math::BigInt->new('18446744073709551615');
 
-    subtype XsUnsignedLong =>
+    declare XsUnsignedLong =>
         as $MathBigInt,
             where { $_ >= 0 && $_ <= $max };
     coerce XsUnsignedLong
@@ -309,7 +309,7 @@ A 32-bit integer. Represented natively.
 
 =cut
 
-subtype XsInt,
+declare XsInt =>
     as Int,
         where { $_ <= 2147483647 && $_ >= -2147483648 };
 
@@ -324,7 +324,7 @@ A 32-bit integer. Represented natively.
 
 =cut
 
-subtype XsUnsignedInt,
+declare XsUnsignedInt =>
     as Int,
         where { $_ <= 4294967295 && $_ >= 0};
 
@@ -339,7 +339,7 @@ A 16-bit integer. Represented natively.
 
 =cut
 
-subtype XsShort =>
+declare XsShort =>
     as Int,
         where { $_ <= 32767 && $_ >= -32768 };
 
@@ -354,7 +354,7 @@ A 16-bit integer. Represented natively.
 
 =cut
 
-subtype XsUnsignedShort =>
+declare XsUnsignedShort =>
     as Int,
         where { $_ <= 65535 && $_ >= 0 };
 
@@ -369,7 +369,7 @@ An 8-bit integer. Represented natively.
 
 =cut
 
-subtype XsByte =>
+declare XsByte =>
     as Int,
         where { $_ <= 127 && $_ >= -128 };
 
@@ -384,7 +384,7 @@ An 8-bit integer. Represented natively.
 
 =cut
 
-subtype XsUnsignedByte =>
+declare XsUnsignedByte =>
     as Int,
         where { $_ <= 255 && $_ >= 0 };
 
@@ -399,7 +399,7 @@ A wrapper around built-in Bool.
 
 =cut
 
-subtype XsBoolean =>
+declare XsBoolean =>
     as Bool;
 
 
@@ -421,7 +421,7 @@ A single-precision 32-bit Float. Represented as a L<Math::BigFloat> object, but 
     my $min = $m * Math::BigFloat->new(2 ** -149);
     my $max = $m * Math::BigFloat->new(2 ** 104);
 
-    subtype XsFloat =>
+    declare XsFloat =>
         as $MathBigFloat,
             where { $_->is_nan || $_->is_inf || ( $_ <= $max && $_ >= $min ) };
     coerce XsFloat
@@ -447,7 +447,7 @@ A double-precision 64-bit Float. Represented as a L<Math::BigFloat> object, but 
     my $min = $m * Math::BigFloat->new(2 ** -1075);
     my $max = $m * Math::BigFloat->new(2 ** 970);
 
-    subtype XsDouble =>
+    declare XsDouble =>
         as $MathBigFloat,
             where { $_->is_nan || $_->is_inf || ( $_ < $max && $_ > $min ) };
     coerce XsDouble
@@ -467,7 +467,7 @@ Any base-10 fixed-point number. Represented as a L<Math::BigFloat> object. Set t
 
 =cut
 
-subtype XsDecimal =>
+declare XsDecimal =>
     as $MathBigFloat,
     where { ! $_->is_nan && ! $_->is_inf };
 coerce XsDecimal
@@ -488,7 +488,7 @@ If you enable coerce you can pass a DateTime::Duration object.
 
 =cut
 
-subtype XsDuration =>
+declare XsDuration =>
     as Str,
     where { /^\-?P\d+Y\d+M\d+DT\d+H\d+M\d+(?:\.\d+)?S$/ };
 
@@ -535,7 +535,7 @@ If you enable coerce you can pass a DateTime object.
 =cut
 
 
-subtype XsDateTime =>
+declare XsDateTime =>
     as Str,
         where { /^\-?\d{4}\-\d{2}\-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
@@ -570,7 +570,7 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype XsTime =>
+declare XsTime =>
     as Str,
         where { /^\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
@@ -605,7 +605,7 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype XsDate =>
+declare XsDate =>
     as Str,
         where { /^\-?\d{4}\-\d{2}\-\d{2}Z?(?:[\-\+]\d{2}:?\d{2})?$/ };
 
@@ -641,12 +641,12 @@ integers.
 
 =cut
 
-subtype __XsintPair =>
+declare __XsintPair =>
     as ArrayRef[Int] =>
         where { @$_ == 2 };
 
 
-subtype XsGYearMonth =>
+declare XsGYearMonth =>
     as Str,
         where { /^\d{4}\-\d{2}$/ };
 
@@ -674,7 +674,7 @@ If you enable coerce you can pass a DateTime object.
 
 =cut
 
-subtype XsGYear =>
+declare XsGYear =>
     as Str,
         where { /^\d{4}$/ };
 
@@ -699,7 +699,7 @@ integers.
 
 =cut
 
-subtype XsGMonthDay =>
+declare XsGMonthDay =>
     as Str,
         where { /^\-\-\d{2}\-\d{2}$/ };
 
@@ -727,7 +727,7 @@ If you enable coerce you can pass a DateTime object or Int eg. 24.
 
 =cut
 
-subtype XsGDay =>
+declare XsGDay =>
     as Str,
         where { /^\-\-\-\d{2}$/ };
 
@@ -755,7 +755,7 @@ If you enable coerce you can pass a DateTime object or Int eg. 10.
 
 =cut
 
-subtype XsGMonth =>
+declare XsGMonth =>
     as Str,
         where { $_ => /^\-\-\d{2}$/ };
 
@@ -784,7 +784,7 @@ file will be encoded to UTF-8 before encoding with base64.
 
 =cut
 
-subtype XsBase64Binary =>
+declare XsBase64Binary =>
     as Str,
         where { $_ =~ /^[a-zA-Z0-9=\+\/]+$/m };
 
@@ -810,7 +810,7 @@ If you enable coerce you can pass a URI object.
 
 =cut
 
-subtype XsAnyURI =>
+declare XsAnyURI =>
     as Str,
         where { $_ =~ /^\w+:\/\/.*$/ };
 
