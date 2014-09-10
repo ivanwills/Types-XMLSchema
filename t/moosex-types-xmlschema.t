@@ -18,58 +18,58 @@ use URI;
 
     use Types::XMLSchema qw( :all );
 
-    has 'string'       => ( is => 'rw', isa => 'xs:string' );
-    has 'int'          => ( is => 'rw', isa => 'xs:int' );
-    has 'integer'      => ( is => 'rw', isa => 'xs:integer' );
-    has 'integer_co'   => ( is => 'rw', isa => 'xs:integer', coerce => 1 );
-    has 'posint'       => ( is => 'rw', isa => 'xs:unsignedInt' );
-    has 'boolean'      => ( is => 'rw', isa => 'xs:boolean' );
-    has 'float'        => ( is => 'rw', isa => 'xs:float' );
-    has 'double'       => ( is => 'rw', isa => 'xs:double' );
-    has 'decimal'      => ( is => 'rw', isa => 'xs:decimal' );
-    has 'float_co'     => ( is => 'rw', isa => 'xs:float', coerce => 1 );
-    has 'double_co'    => ( is => 'rw', isa => 'xs:double', coerce => 1 );
-    has 'decimal_co'   => ( is => 'rw', isa => 'xs:decimal', coerce => 1 );
+    has 'string'       => ( is => 'rw', isa => XsString );
+    has 'int'          => ( is => 'rw', isa => XsInt );
+    has 'integer'      => ( is => 'rw', isa => XsInteger );
+    has 'integer_co'   => ( is => 'rw', isa => XsInteger, coerce => 1 );
+    has 'posint'       => ( is => 'rw', isa => XsUnsignedInt );
+    has 'boolean'      => ( is => 'rw', isa => XsBoolean );
+    has 'float'        => ( is => 'rw', isa => XsFloat );
+    has 'double'       => ( is => 'rw', isa => XsDouble );
+    has 'decimal'      => ( is => 'rw', isa => XsDecimal );
+    has 'float_co'     => ( is => 'rw', isa => XsFloat, coerce => 1 );
+    has 'double_co'    => ( is => 'rw', isa => XsDouble, coerce => 1 );
+    has 'decimal_co'   => ( is => 'rw', isa => XsDecimal, coerce => 1 );
 
-    has 'duration'     => ( is => 'rw', isa => 'xs:duration' );
-    has 'datetime'     => ( is => 'rw', isa => 'xs:dateTime' );
-    has 'time'         => ( is => 'rw', isa => 'xs:time' );
-    has 'date'         => ( is => 'rw', isa => 'xs:date' );
-    has 'gYearMonth'   => ( is => 'rw', isa => 'xs:gYearMonth' );
-    has 'gYear'        => ( is => 'rw', isa => 'xs:gYear' );
-    has 'gMonthDay'    => ( is => 'rw', isa => 'xs:gMonthDay' );
-    has 'gDay'         => ( is => 'rw', isa => 'xs:gDay' );
-    has 'gMonth'       => ( is => 'rw', isa => 'xs:gMonth' );
+    has 'duration'     => ( is => 'rw', isa => XsDuration );
+    has 'datetime'     => ( is => 'rw', isa => XsDateTime );
+    has 'time'         => ( is => 'rw', isa => XsTime );
+    has 'date'         => ( is => 'rw', isa => XsDate );
+    has 'gYearMonth'   => ( is => 'rw', isa => XsGYearMonth );
+    has 'gYear'        => ( is => 'rw', isa => XsGYear );
+    has 'gMonthDay'    => ( is => 'rw', isa => XsGMonthDay );
+    has 'gDay'         => ( is => 'rw', isa => XsGDay );
+    has 'gMonth'       => ( is => 'rw', isa => XsGMonth );
 
-    has 'duration_co'     => ( is => 'rw', isa => 'xs:duration', coerce => 1 );
-    has 'datetime_co'     => ( is => 'rw', isa => 'xs:dateTime', coerce => 1 );
-    has 'time_co'         => ( is => 'rw', isa => 'xs:time', coerce => 1 );
-    has 'date_co'         => ( is => 'rw', isa => 'xs:date', coerce => 1 );
-    has 'gYearMonth_co'   => ( is => 'rw', isa => 'xs:gYearMonth', coerce => 1 );
-    has 'gYear_co'        => ( is => 'rw', isa => 'xs:gYear', coerce => 1 );
-    has 'gMonthDay_co'    => ( is => 'rw', isa => 'xs:gMonthDay', coerce => 1 );
-    has 'gDay_co'         => ( is => 'rw', isa => 'xs:gDay', coerce => 1 );
-    has 'gMonth_co'       => ( is => 'rw', isa => 'xs:gMonth', coerce => 1 );
+    has 'duration_co'     => ( is => 'rw', isa => XsDuration, coerce => 1 );
+    has 'datetime_co'     => ( is => 'rw', isa => XsDateTime, coerce => 1 );
+    has 'time_co'         => ( is => 'rw', isa => XsTime, coerce => 1 );
+    has 'date_co'         => ( is => 'rw', isa => XsDate, coerce => 1 );
+    has 'gYearMonth_co'   => ( is => 'rw', isa => XsGYearMonth, coerce => 1 );
+    has 'gYear_co'        => ( is => 'rw', isa => XsGYear, coerce => 1 );
+    has 'gMonthDay_co'    => ( is => 'rw', isa => XsGMonthDay, coerce => 1 );
+    has 'gDay_co'         => ( is => 'rw', isa => XsGDay, coerce => 1 );
+    has 'gMonth_co'       => ( is => 'rw', isa => XsGMonth, coerce => 1 );
 
-    has 'base64Binary'    => ( is => 'rw', isa => 'xs:base64Binary' );
-    has 'base64Binary_co' => ( is => 'rw', isa => 'xs:base64Binary', coerce => 1 );
+    has 'base64Binary'    => ( is => 'rw', isa => XsBase64Binary );
+    has 'base64Binary_co' => ( is => 'rw', isa => XsBase64Binary, coerce => 1 );
 
-    has 'anyURI'          => ( is => 'rw', isa => 'xs:anyURI' );
-    has 'anyURI_uri'      => ( is => 'rw', isa => 'xs:anyURI', coerce => 1 );
+    has 'anyURI'          => ( is => 'rw', isa => XsAnyURI );
+    has 'anyURI_uri'      => ( is => 'rw', isa => XsAnyURI, coerce => 1 );
 
-    has 'nonPositiveInteger' => ( is => 'rw', isa => 'xs:nonPositiveInteger', coerce => 1 );
-    has 'positiveInteger'    => ( is => 'rw', isa => 'xs:positiveInteger', coerce => 1 );
-    has 'nonNegativeInteger' => ( is => 'rw', isa => 'xs:nonNegativeInteger', coerce => 1 );
-    has 'negativeInteger'    => ( is => 'rw', isa => 'xs:negativeInteger', coerce => 1 );
+    has 'nonPositiveInteger' => ( is => 'rw', isa => XsNonPositiveInteger, coerce => 1 );
+    has 'positiveInteger'    => ( is => 'rw', isa => XsPositiveInteger, coerce => 1 );
+    has 'nonNegativeInteger' => ( is => 'rw', isa => XsNonNegativeInteger, coerce => 1 );
+    has 'negativeInteger'    => ( is => 'rw', isa => XsNegativeInteger, coerce => 1 );
 
-    has 'byte'         => ( is => 'rw', isa => 'xs:byte' );
-    has 'short'        => ( is => 'rw', isa => 'xs:short' );
-    has 'long'             => ( is => 'rw', isa => 'xs:long', coerce => 1 );
+    has 'byte'         => ( is => 'rw', isa => XsByte );
+    has 'short'        => ( is => 'rw', isa => XsShort );
+    has 'long'             => ( is => 'rw', isa => XsLong, coerce => 1 );
 
-    has 'unsignedByte'    => ( is => 'rw', isa => 'xs:unsignedByte' );
-    has 'unsignedShort'   => ( is => 'rw', isa => 'xs:unsignedShort' );
-    has 'unsignedInt'     => ( is => 'rw', isa => 'xs:unsignedInt' );
-    has 'unsignedLong'     => ( is => 'rw', isa => 'xs:unsignedLong', coerce => 1 );
+    has 'unsignedByte'    => ( is => 'rw', isa => XsUnsignedByte );
+    has 'unsignedShort'   => ( is => 'rw', isa => XsUnsignedShort );
+    has 'unsignedInt'     => ( is => 'rw', isa => XsUnsignedInt );
+    has 'unsignedLong'     => ( is => 'rw', isa => XsUnsignedLong, coerce => 1 );
 }
 
 my $o;
