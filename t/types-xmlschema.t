@@ -14,7 +14,7 @@ use URI;
 
 {
     package TestTypesXMLSchema;
-    use Moose;
+    use Moo;
 
     use Types::XMLSchema qw( :all );
 

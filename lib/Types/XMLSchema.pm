@@ -820,10 +820,6 @@ coerce XsAnyURI
             return $_->as_string;
         };
 
-no Moose::Util::TypeConstraints;
-no Moose;
-
-
 =head1 SEE ALSO
 
 =over 4
