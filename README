@@ -2,7 +2,7 @@ NAME
     Types::XMLSchema - XMLSchema compatible Moose types library
 
 VERSION
-    version 0.07
+    version 0.01
 
 SYNOPSIS
         package My::Class;
