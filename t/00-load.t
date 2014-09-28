@@ -1,9 +1,11 @@
-#!perl -T
+#!/usr/bin/perl
 
+use strict;
+use warnings;
 use Test::More tests => 1;
 
 BEGIN {
-    use_ok( 'MooseX::Types::XMLSchema' );
+    use_ok( 'Types::XMLSchema' );
 }
 
-diag( "Testing MooseX::Types::XMLSchema $MooseX::Types::XMLSchema::VERSION, Perl $], $^X" );
+diag( "Testing Types::XMLSchema $Types::XMLSchema::VERSION, Perl $], $^X" );
